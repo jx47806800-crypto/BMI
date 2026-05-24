@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>BMI計算機</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<style>
+		body{
+		background-color: #000000;
+		text-align: center;
+		padding: 60px;
+		img{
+			height: 200px;
+			width: auto;
+		}
+		input{
+			width: 50vw;
+			font-size: 16px;
+			padding: 10px;
+			margin: 10px;
+			border: 2px solid #ddd;
+			border-radius: 5px;
+		}
+		button{
+			width: 50vw;
+			font-size: 16px;
+			padding: 10px;
+			margin: 10px;
+			border: 0;
+			border-radius: 5px;
+			color: #fff;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+    <img id="img-guess" src="guess.png"/>
+    <img id="img-fat" src="fat.png"/>
+    <img id="img-normal" src="normal.png"/>
+    <img id="img-slim" src="slim.png"/>
+    <h1 id="result">BMI計算結果:</h1>
+    <input type="number"  id="input1" placeholder="體重(kg)">
+    <input type="number"  id="input2" placeholder="身高(m)">
+    <button id="btn-start" type="submit">計算!!!!!!!!</button>
+	<script>
+		$("#img-slim").hide();
+		$("#img-fat").hide();
+		$("#img-normal").hide();
+		$("#btn-start").on("click", getresult);
+		//---------------------------
+		function getresult(){
+			var w = $("#input1").val();
+			var h = $("#input2").val();
+			//alert("h=" + h + ' w=' + w);
+			h = parseFloat(h);
+			w = parseFloat(w);
+			var bmi = w / (h * h);
+			bmi = bmi.toFixed(2);
+			$("img").hide();
+			var text;
+			if(bmi <= 18.5){
+				text = "太輕了";
+				$("#img-slim").show();
+			}else if(18.5 < bmi && bmi <= 24.9){
+				text = "正常";
+				$("#img-normal").show();
+			}else{
+				text = "過胖!!!!!";
+				$("#img-fat").show();
+			}
+			$("#result").text("BMI計算結果:" + bmi + text);
+		}
+	</script>
+</body>
+</html>
